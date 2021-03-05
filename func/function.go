@@ -2,7 +2,9 @@ package main
 
 // import . "fmt" 静态导入
 
-import . "fmt"
+import (
+	. "fmt"
+)
 
 // 函数不支持嵌套、重载和默认参数
 
@@ -16,6 +18,7 @@ func hello1(name string) (word string) {
 	word = "Hello " + name
 	return 
 }
+
 
 // ========================================== 多返回值 ========================================== //
 func introduction(name ,address string) (word string,addr string){
@@ -37,11 +40,18 @@ func add(x,y int) int {
 	return x + y
 }
 
+func If(condition bool, trueVal, falseVal interface{}) interface{} {
+	if condition {
+		return trueVal
+	}
+	return falseVal
+}
+
 // ========================================== 变长参数，传入的是一个 slice ============================== //
-func join(str ...string) (ret string) {
+func join(split string, str ...string) (ret string) {
 	ret = ""
-	for _,i := range str {
-		ret += i
+	for i,v := range str {
+		ret += If(i != len(str) - 1, v + split, v).(string)
 	}
 	return 
 }
@@ -58,8 +68,8 @@ func main(){
 	Println(ret)
 
 	slice := []string{"a","c","d","e","f","g","h"}
-	Println(join("a","c","d","e","f","g","h"))
-	Println(join(slice...)) // 直接使用 slice 作为参数，需要手动展开
+	Println(join("-","a","c","d","e","f","g","h"))
+	Println(join("=", slice...)) // 直接使用 slice 作为参数，需要手动展开
 	
 	Println("使用多返回值作为函数的参数：",add(generater()))
 
