@@ -24,5 +24,6 @@ func main() {
 	}
 	fmt.Println("waiting...........")
 	wg.Wait()
+	close(ch)
 	fmt.Println("done")
 }

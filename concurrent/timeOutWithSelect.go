@@ -13,9 +13,10 @@ func main() {
 		for {
 			rand.Seed(time.Now().UnixNano())
 			rd := rand.Intn(10)
-			time.Sleep(time.Second * 2)
-			if rd >= 5 {
+			if rd <= 5 {
 				ch <- rd
+			} else {
+				time.Sleep(time.Second * 3)
 			}
 		}
 	}()

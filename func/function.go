@@ -40,6 +40,8 @@ func add(x,y int) int {
 	return x + y
 }
 
+
+// 三元运算符的简单替代， 调用方需要自己将返回值转至需要的类型
 func If(condition bool, trueVal, falseVal interface{}) interface{} {
 	if condition {
 		return trueVal
