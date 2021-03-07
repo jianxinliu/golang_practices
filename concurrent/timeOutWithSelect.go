@@ -8,7 +8,6 @@ import (
 
 func main() {
 	ch := make(chan int)
-	rand.Seed(time.Now().UnixNano())
 	go func() {
 		for {
 			rand.Seed(time.Now().UnixNano())
@@ -16,14 +15,17 @@ func main() {
 			if rd <= 5 {
 				ch <- rd
 			} else {
+				// 0.5 的概率发生延迟
 				time.Sleep(time.Second * 3)
 			}
 		}
 	}()
 
-	timeout := time.After(2 * time.Second)
-
 	for {
+		// 返回一个 channel， 该 channel 在指定时间后会传入一个值，在这之前一直阻塞
+		timeout := time.After(2 * time.Second)
+
+		// 比哪个 channel 的阻塞时间短
 		select {
 			case s := <-ch:
 				fmt.Println(s)
