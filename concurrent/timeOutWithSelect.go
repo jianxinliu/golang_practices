@@ -27,7 +27,7 @@ func main() {
 		select {
 			case s := <-ch:
 				fmt.Println(s)
-			case <- timeout:
+			case <- timeout: // 如果 ch 没有 ready ,而 timeout 计时到达，则认为 ch 没有在规定时间内 ready ,则认为超时
 				fmt.Println("time out")
 		}
 	}
