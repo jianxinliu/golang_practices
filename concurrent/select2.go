@@ -10,7 +10,7 @@ func fibonacci(c, quit chan int) {
 		select {
 		case c <- x: // 如果可以写入 c 通道，则计算
 			x, y = y, y + x
-		case <- quit: // 如果收到介绍消息，则结束
+		case <- quit: // 如果收到结束消息，则结束
 			fmt.Println("quit")
 			return
 		}
